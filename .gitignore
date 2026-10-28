@@ -1,0 +1,5 @@
+research/
+__pycache__/
+*.tar.gz
+*.log
+.preview.pid
