@@ -1,5 +1,11 @@
 # La Zagara — nuova esperienza web
 
+## Loop video hero Azienda
+
+Montaggio locale H.264 1280×720 di 18 secondi, senza traccia audio, con tre clip Mixkit Stock Video Free License. Le fonti sono elencate in `design/video-sources.json` e nella pagina `/crediti-video/`. Le riprese sono illustrative e non documentano l'azienda.
+
+Per ricrearlo: `python make-loop.py` (richiede FFmpeg e accesso alle fonti), quindi `python autoplay-hero.py` dopo gli altri script di generazione. Il file pronto `dist/assets/zagara-hero-loop.mp4` è incluso. La hero usa video HTML nativo con autoplay, muted, loop, playsinline e object-fit: cover. Include pausa/ripresa, copertina di riserva e rispetto del movimento ridotto. Non viene richiesto YouTube per lo sfondo della hero; i filmati on-demand nelle altre sezioni rimangono disponibili.
+
 ## Hero guidate dallo scroll
 
 Dopo gli altri script eseguire `python scroll-hero.py`: la homepage usa una sequenza sticky a quattro scene che segue lo scorrimento verticale senza intercettare o bloccare la rotella. Frecce manuali e tastiera rimangono disponibili. Con movimento ridotto si usa una hero statica con selezione manuale. La pagina Azienda include il video aziendale direttamente nella hero, su clic, con chiusura e rimozione del lettore.
