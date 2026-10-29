@@ -1,5 +1,11 @@
 # La Zagara — nuova esperienza web
 
+## Edizione pubblica per il cliente
+
+Identità aggiornata con logo vettoriale in `dist/assets/zagara-modern.svg`: fiore geometrico, cuore agrume e wordmark essenziale. Approfondimenti dedicati alle pagine principali e alle schede prodotto; FAQ nella pagina Contatti.
+
+Per rigenerare l'edizione completa eseguire in ordine `python generate.py`, `python enrich.py`, `python deepen.py`, `python validate.py`. Gli script di arricchimento conservano le informazioni della fonte senza introdurre dati commerciali non verificati.
+
 Sito multipagina in HTML, CSS e JavaScript, con generatore Python. Foto, logo, contenuti, articoli e calendari provengono da https://www.zagara.com/.
 
 Direzione: editoriale mediterranea, verde bosco e avorio, accenti arancio, Cormorant Garamond e Manrope. Elemento distintivo: slideshow fotografico a tutta altezza con tipografia monumentale e sigillo animato.
