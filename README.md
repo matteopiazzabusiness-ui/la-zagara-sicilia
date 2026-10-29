@@ -1,5 +1,11 @@
 # La Zagara — nuova esperienza web
 
+## Interazioni e filmati
+
+Eseguire `python interactive.py` dopo `python cinematic.py` per includere schede prodotto a tab accessibili da tastiera, ricerca delle varietà, hero aggiuntivi e video su richiesta. Il lettore YouTube viene creato soltanto al clic e rimosso alla chiusura. Sono presenti collegamenti alternativi a YouTube.
+
+Fonti: video aziendale incorporato da https://www.zagara.com/chi-siamo (`mFyPQzjpzbE`) e “Scent of Zagara”, racconto del territorio pubblicato da https://www.distrettoagrumidisicilia.it/video/ (`KPuC0XRiXWo`). Il secondo filmato non è presentato come produzione aziendale La Zagara. I filmati rimangono sui player dei titolari, senza download o ripubblicazione dei file.
+
 ## Edizione cinematografica
 
 Il logo fornito dal cliente è conservato integro in `design/client-logo.png` e distribuito in `dist/assets/zagara-client-logo.png`. Dopo la pipeline di generazione eseguire anche `python cinematic.py` e `python validate.py`. Il sito pronto è già incluso in `dist/`.
