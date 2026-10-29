@@ -100,3 +100,6 @@
     $('.form-status',f).textContent='Richiesta preparata: completa l’invio nel tuo programma di posta.';
   });
 })();
+
+// Cinema scroll: movement follows the viewport and respects reduced motion.
+(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');const scenes=[...document.querySelectorAll('.cinema-scene')];let pending=false;function draw(){if(!media.matches)scenes.forEach(s=>{const r=s.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)s.querySelector('.cinema-photo').style.transform=`translateY(${(r.top+r.height/2-innerHeight/2)*-.12}px)`});pending=false}addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(draw)}},{passive:true});draw()})();

@@ -1,5 +1,11 @@
 # La Zagara — nuova esperienza web
 
+## Edizione cinematografica
+
+Il logo fornito dal cliente è conservato integro in `design/client-logo.png` e distribuito in `dist/assets/zagara-client-logo.png`. Dopo la pipeline di generazione eseguire anche `python cinematic.py` e `python validate.py`. Il sito pronto è già incluso in `dist/`.
+
+La homepage aggiunge capitoli narrativi su territorio, atlante delle varietà, cura e stagionalità. Le scene fotografiche seguono lo scorrimento con movimento ridotto rispettato. Le pagine interne aggiungono approfondimenti coerenti con la loro funzione.
+
 ## Edizione pubblica per il cliente
 
 Identità aggiornata con logo vettoriale in `dist/assets/zagara-modern.svg`: fiore geometrico, cuore agrume e wordmark essenziale. Approfondimenti dedicati alle pagine principali e alle schede prodotto; FAQ nella pagina Contatti.
