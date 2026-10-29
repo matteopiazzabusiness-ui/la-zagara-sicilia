@@ -1,5 +1,9 @@
 # La Zagara — nuova esperienza web
 
+## Hero guidate dallo scroll
+
+Dopo gli altri script eseguire `python scroll-hero.py`: la homepage usa una sequenza sticky a quattro scene che segue lo scorrimento verticale senza intercettare o bloccare la rotella. Frecce manuali e tastiera rimangono disponibili. Con movimento ridotto si usa una hero statica con selezione manuale. La pagina Azienda include il video aziendale direttamente nella hero, su clic, con chiusura e rimozione del lettore.
+
 ## Interazioni e filmati
 
 Eseguire `python interactive.py` dopo `python cinematic.py` per includere schede prodotto a tab accessibili da tastiera, ricerca delle varietà, hero aggiuntivi e video su richiesta. Il lettore YouTube viene creato soltanto al clic e rimosso alla chiusura. Sono presenti collegamenti alternativi a YouTube.

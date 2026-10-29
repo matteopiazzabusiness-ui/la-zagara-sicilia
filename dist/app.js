@@ -52,29 +52,17 @@
   addEventListener('pageshow',()=>$('.page-transition')?.classList.remove('leaving'));
   const slides=$$('.hero-slide');
   if(slides.length){
-    let current=0,paused=reduced.matches,timer=null,started=performance.now(),elapsed=0;
-    const duration=7500,progress=$('.slide-progress span'),pauseButton=$('.slide-pause');
-    function setSlide(i){
-      current=(i+slides.length)%slides.length;
-      slides.forEach((s,j)=>{s.classList.toggle('active',j===current);s.setAttribute('aria-hidden',String(j!==current));s.inert=j!==current;});
-      $('.slide-count').innerHTML=String(current+1).padStart(2,'0')+' <small>/ '+String(slides.length).padStart(2,'0')+'</small>';
-      elapsed=0;started=performance.now();progress.style.width='0%';
+    const stage=$('.scroll-stage'),hero=$('.hero'),progress=$('.slide-progress span');let current=-1,queued=false;
+    function setSlide(i){i=Math.max(0,Math.min(slides.length-1,i));if(i===current)return;current=i;
+      slides.forEach((s,j)=>{s.classList.toggle('active',j===i);s.classList.toggle('passed',j<i);s.setAttribute('aria-hidden',String(j!==i));s.inert=j!==i;});
+      $('.slide-count').innerHTML=String(i+1).padStart(2,'0')+' <small>/ '+String(slides.length).padStart(2,'0')+'</small>';
+      progress.style.width=((i+1)/slides.length*100)+'%';
     }
-    function animate(now){
-      if(!paused && !document.hidden){elapsed+=now-started;progress.style.width=Math.min(100,elapsed/duration*100)+'%';if(elapsed>=duration)setSlide(current+1);}
-      started=now;timer=requestAnimationFrame(animate);
-    }
-    $('.slide-prev').addEventListener('click',()=>setSlide(current-1));
-    $('.slide-next').addEventListener('click',()=>setSlide(current+1));
-    function pause(){paused=!paused;pauseButton.textContent=paused?'▶':'Ⅱ';pauseButton.setAttribute('aria-label',paused?'Avvia slideshow':'Metti in pausa slideshow');}
-    pauseButton.addEventListener('click',pause);
-    $('.hero').addEventListener('focusin',()=>{if(!paused){paused=true;pauseButton.textContent='▶';pauseButton.setAttribute('aria-label','Avvia slideshow');}});
-    $('.hero').addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();setSlide(current+1);}if(e.key==='ArrowLeft'){e.preventDefault();setSlide(current-1);}});
-    let startX=0;
-    $('.hero').addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX;},{passive:true});
-    $('.hero').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>65)setSlide(current+(dx<0?1:-1));},{passive:true});
-    document.addEventListener('visibilitychange',()=>{started=performance.now();});
-    setSlide(0);pauseButton.textContent=paused?'▶':'Ⅱ';pauseButton.setAttribute('aria-label',paused?'Avvia slideshow':'Metti in pausa slideshow');timer=requestAnimationFrame(animate);
+    function measure(){if(!reduced.matches&&stage){const top=stage.getBoundingClientRect().top+scrollY-parseFloat(getComputedStyle(hero).top||0);const distance=stage.offsetHeight-hero.offsetHeight;const ratio=Math.max(0,Math.min(.999,(scrollY-top)/Math.max(1,distance)));setSlide(Math.floor(ratio*slides.length));}queued=false;}
+    function go(i){const next=Math.max(0,Math.min(slides.length-1,i));setSlide(next);if(!reduced.matches&&stage){const top=stage.getBoundingClientRect().top+scrollY-parseFloat(getComputedStyle(hero).top||0);const distance=stage.offsetHeight-hero.offsetHeight;scrollTo({top:Math.max(0,top+distance*(next+.12)/slides.length),behavior:'instant'});}}
+    $('.slide-prev').addEventListener('click',()=>go(current-1));$('.slide-next').addEventListener('click',()=>go(current+1));
+    hero.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(current+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(current-1)}});
+    addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(measure)}},{passive:true});addEventListener('resize',measure);reduced.addEventListener('change',()=>{setSlide(0);measure()});setSlide(0);measure();
   }
   const gallery=$$('.gallery-item'),dialog=$('#lightbox');let galleryIndex=0,lastFocus;
   function showImage(i){galleryIndex=(i+gallery.length)%gallery.length;const b=gallery[galleryIndex],im=$('figure img',dialog);im.src=b.dataset.gallery;im.alt=$('img',b).alt;$('figcaption',dialog).textContent=b.dataset.caption;}
