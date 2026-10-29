@@ -1,5 +1,9 @@
 # La Zagara — nuova esperienza web
 
+## Home video e sezioni indipendenti
+
+Eseguire `python home-scenes.py` per ultimo: porta il loop muto nella hero Home e sostituisce il carosello sticky con quattro sezioni prodotto indipendenti, animate all'ingresso nel viewport. Nessuna intercettazione della rotella. Il logo originale viene composto in SVG con fondo trasparente e fiore opaco; la favicon è un SVG leggero contenente soltanto il simbolo. Le versioni ImageGen sperimentali non sono utilizzate nel sito.
+
 ## Loop video hero Azienda
 
 Montaggio locale H.264 1280×720 di 18 secondi, senza traccia audio, con tre clip Mixkit Stock Video Free License. Le fonti sono elencate in `design/video-sources.json` e nella pagina `/crediti-video/`. Le riprese sono illustrative e non documentano l'azienda.
