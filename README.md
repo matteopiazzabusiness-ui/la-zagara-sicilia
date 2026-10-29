@@ -1,5 +1,9 @@
 # La Zagara — nuova esperienza web
 
+## Fluidità e pagina Azienda
+
+Eseguire `python smooth-platform.py` per ultimo. Chi siamo usa una hero fotografica e non ripete i video della Home. La barra mantiene altezza costante durante lo scroll, la navigazione è nativa senza ritardi artificiali, le animazioni di ingresso dei capitoli si eseguono una sola volta e il menu si sblocca correttamente passando a desktop o tornando indietro.
+
 ## Home video e sezioni indipendenti
 
 Eseguire `python home-scenes.py` per ultimo: porta il loop muto nella hero Home e sostituisce il carosello sticky con quattro sezioni prodotto indipendenti, animate all'ingresso nel viewport. Nessuna intercettazione della rotella. Il logo originale viene composto in SVG con fondo trasparente e fiore opaco; la favicon è un SVG leggero contenente soltanto il simbolo. Le versioni ImageGen sperimentali non sono utilizzate nel sito.

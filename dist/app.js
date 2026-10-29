@@ -25,13 +25,14 @@
       else if (!e.shiftKey && document.activeElement===last) {e.preventDefault();first.focus();}
     }
   });
+  const parallaxImages=$$('.parallax-image');
   let scrollPending = false;
   function updateScroll() {
     const y = window.scrollY;
     $('.site-header')?.classList.toggle('scrolled',y>40);
     const max = document.documentElement.scrollHeight-innerHeight;
     $('.read-progress').style.width=(max>0?y/max*100:0)+'%';
-    if (!reduced.matches) $$('.parallax-image').forEach(img=>{
+    if (!reduced.matches) parallaxImages.forEach(img=>{
       const rect=img.parentElement.getBoundingClientRect();
       if(rect.bottom>0 && rect.top<innerHeight) img.style.transform=`translateY(${(rect.top+rect.height/2-innerHeight/2)*-.10}px)`;
     });
@@ -39,17 +40,9 @@
   }
   addEventListener('scroll',()=>{if(!scrollPending){scrollPending=true;requestAnimationFrame(updateScroll);}},{passive:true});
   updateScroll();
-  // Progressive page transitions retain normal link behavior for downloads, external URLs and modified clicks.
-  document.addEventListener('click',e=>{
-    const a=e.target.closest('a[href]');
-    if(!a || e.defaultPrevented || e.button!==0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target || a.hasAttribute('download') || reduced.matches)return;
-    const url=new URL(a.href,location.href);
-    if(url.origin!==location.origin || /\.(pdf|png|jpg|jpeg|webp)$/i.test(url.pathname) || (url.pathname===location.pathname && url.hash))return;
-    if(url.protocol!=='http:' && url.protocol!=='https:')return;
-    e.preventDefault();$('.page-transition')?.classList.add('leaving');
-    setTimeout(()=>{location.href=url.href;},420);
-  });
-  addEventListener('pageshow',()=>$('.page-transition')?.classList.remove('leaving'));
+  // Native navigation avoids an artificial delay and preserves browser history.
+  addEventListener('pageshow',()=>{document.body.classList.remove('menu-open');menu?.setAttribute('aria-expanded','false');menu?.setAttribute('aria-label','Apri menu');$('.page-transition')?.classList.remove('leaving')});
+  const mobileMenu=matchMedia('(max-width:800px)');mobileMenu.addEventListener('change',e=>{if(!e.matches){document.body.classList.remove('menu-open');menu?.setAttribute('aria-expanded','false');menu?.setAttribute('aria-label','Apri menu')}});
   const slides=$$('.hero-slide');
   if(slides.length){
     const stage=$('.scroll-stage'),hero=$('.hero'),progress=$('.slide-progress span');let current=-1,queued=false;
